@@ -1,15 +1,55 @@
 <hello name="{{ name }} {{test.name}}"></hello>
-<p class="{{className}}">
-  Can able to see my count {{dataService.count==0?'yes' : 'No'}}<br/>
-  <!-- My Details are => {{printDetails()}} -->
-</p>
+<p bind-class="className" [style.background]="'red'"
+[style.font-size.px]="10"
+>
+	Can able to see my count {{dataService.count==0?'yes' : 'No'}}<br/>
+	<!-- My Details are => {{printDetails()}} -->
+</p >
+
+ 
+<p [innerHTML]='className'>
+  </p>
+  <p>
+    {{className}}
+    </p>
 <button (click)=increasecount()>increase</button>
+{{name}}<input id ='pavithra' [(ngModel)]="name" on-change=print($event)/>
 <table>
-  <thead>
-    <tr>
-    <th>name</th>
-    <th>age</th>
-    </tr>
-  </thead>
-  <tbody><tr><td>Pavithra</td><td>23</td></tbody>
+	<thead>
+		<tr>
+			<th [attr.colspan]="2">name</th>
+			<th>age</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Pavithra</td>
+      <td>sekar</td>
+			<td>23</td>
+	</tbody>
 </table>
+<button on-click=order()>Order</button>
+<ng-template [ngIf]="user"  [ngIfThen]= "userTemplate"  [ngIfElse]= "noUserTemplate">
+users are present
+ </ng-template>
+
+<ng-template #userTemplate>
+<ng-template ngFor [ngForOf] ="user" let-person >
+ <div [ngSwitch]="person.age">
+   <div class="case1" *ngSwitchCase="23">
+     {{person.name}}
+     </div>
+     <div class="case2" *ngSwitchCase="24">
+    {{person.name}}
+     </div>
+     <div *ngSwitchDefault>
+    {{person.name}}
+     </div>
+   </div>
+  </ng-template>
+   </ng-template>
+
+ 
+  <ng-template #noUserTemplate>
+    No User variable
+  </ng-template>
